@@ -8,7 +8,7 @@ class ProductRepository:
     def __init__(self):
         db_params = {
             'host': 'localhost',
-            'database': 'trendyol-takip',
+            'database': 'amazon-takip',
             'user': 'trendyol',
             'password': 'trendyol-bot-1234321'
         }
@@ -58,12 +58,14 @@ class ProductRepository:
 
     def get_product_by_link(self, link):
         try:
+            
             link = link.strip().lower()
-
+            
             self.cursor.execute("SELECT * FROM Products WHERE lower(trim(link)) = %s", (link,))
             row = self.cursor.fetchone()
 
             if row:
+                
                 return self._row_to_product(row)
             else:
                 return False
